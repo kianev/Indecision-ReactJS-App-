@@ -10,11 +10,18 @@ class App extends Component {
     }
 }
 
-  removeAll(e){
+  onRemoveAll(e){
       this.setState({
         options: []
       })
   }
+
+  onMakeDecision(){
+    let randomNum = Math.floor(Math.random() * this.state.options.length);
+    let option = this.state.options[randomNum];
+    alert(option);
+  }
+
   render () {
     const onFormSumbit = (e) => {
       e.preventDefault();
@@ -37,15 +44,18 @@ class App extends Component {
         <h1>{this.state.title}</h1>
         {this.state.subtitle && <p>{this.state.subtitle}</p>}
         <p>{this.state.options.length > 0 ? 'Here are your options: ' : 'No options'}</p>
-        <p>{this.state.options.length }</p>
+        <button
+          disabled={this.state.options.length === 0}
+          onClick={this.onMakeDecision.bind(this)}>What should I do?</button>
+        <button onClick={this.onRemoveAll.bind(this)}>Remove All</button>
+
         <ol>
-          <li>Item One</li>
-          <li>Item Two</li>
+          {this.state.options.map((option) => <li key={option}>{option}</li>)}
         </ol>
         <form onSubmit={onFormSumbit}>
           <input type="text" name="option"/>
           <button>Add Option</button>
-          <button onClick={this.removeAll.bind(this)}>Remove All</button>
+
         </form>
       </div>
     )
