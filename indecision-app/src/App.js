@@ -3,45 +3,50 @@ import './App.css'
 
 class App extends Component {
   constructor(props) {
-    super()
+    super(props);
     this.state = {
-      count: 0
+      title: "Indecision App",
+      options: []
     }
+}
+
+  removeAll(e){
+      this.setState({
+        options: []
+      })
   }
-
-  addOne(e){
-    this.setState({
-      count: this.state.count + 1
-    })
-  }
-
-  minusOne(e){
-    this.setState({
-      count: this.state.count - 1
-    })
-  }
-
-  reset(e){
-    this.setState({
-      count: 0
-    })
-  }
-
-  //experimental syntax to bind this
-  /*handleClick = () => {
-    console.log('this is:', this);
-  }*/
-
   render () {
+    const onFormSumbit = (e) => {
+      e.preventDefault();
+     const option = e.target.elements.option.value;
+
+     if(option){
+       let optionsArray = this.state.options;
+       optionsArray.push(option);
+
+       this.setState({
+         options: optionsArray
+       })
+
+       e.target.elements.option.value = "";
+     }
+    }
+
     return (
       <div className="App">
-        <h1>{this.state.count}</h1>
-        <button onClick={this.addOne.bind(this)}>+1</button>
-        <button onClick={this.minusOne.bind(this)}>-1</button>
-        <button onClick={this.reset.bind(this)}>Reset</button>
-       /* <button onClick={this.handleClick}>
-          Click me
-        </button>*/
+        <h1>{this.state.title}</h1>
+        {this.state.subtitle && <p>{this.state.subtitle}</p>}
+        <p>{this.state.options.length > 0 ? 'Here are your options: ' : 'No options'}</p>
+        <p>{this.state.options.length }</p>
+        <ol>
+          <li>Item One</li>
+          <li>Item Two</li>
+        </ol>
+        <form onSubmit={onFormSumbit}>
+          <input type="text" name="option"/>
+          <button>Add Option</button>
+          <button onClick={this.removeAll.bind(this)}>Remove All</button>
+        </form>
       </div>
     )
   }
