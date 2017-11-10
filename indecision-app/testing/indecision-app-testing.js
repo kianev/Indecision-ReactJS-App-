@@ -8,12 +8,12 @@ class App extends Component {
       title: "Indecision App",
       options: []
     }
-}
+  }
 
   onRemoveAll(e){
-      this.setState({
-        options: []
-      })
+    this.setState({
+      options: []
+    })
   }
 
   onMakeDecision(){
@@ -25,18 +25,18 @@ class App extends Component {
   render () {
     const onFormSumbit = (e) => {
       e.preventDefault();
-     const option = e.target.elements.option.value;
+      const option = e.target.elements.option.value;
 
-     if(option){
-       let optionsArray = this.state.options;
-       optionsArray.push(option);
+      if(option){
+        let optionsArray = this.state.options;
+        optionsArray.push(option);
 
-       this.setState({
-         options: optionsArray
-       })
+        this.setState({
+          options: optionsArray
+        })
 
-       e.target.elements.option.value = "";
-     }
+        e.target.elements.option.value = "";
+      }
     }
 
     return (
@@ -62,3 +62,4 @@ class App extends Component {
   }
 }
 export default App
+

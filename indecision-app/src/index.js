@@ -1,8 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
-//import Test from './Test';
+import IndecisionApp from './IndecisionApp';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<IndecisionApp />, document.getElementById('root'));
 
