@@ -1,12 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Option extends Component {
-  render () {
-    return (
-      <div className="options">
-       Option: {this.props.optionText}
-      </div>
-    )
-  }
+const Option = (props) => {
+  return (
+    <div className="options">
+      {props.optionText}
+      <button onClick={() => {
+        props.handleDeleteOption(props.optionText);
+      }}>
+        Remove
+      </button>
+    </div>
+  )
 }
+
 export default Option

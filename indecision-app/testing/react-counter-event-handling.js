@@ -3,9 +3,9 @@ import './App.css'
 
 class App extends Component {
   constructor(props) {
-    super()
+    super(props)
     this.state = {
-      count: 0
+      count: props.count
     }
   }
 
@@ -45,5 +45,9 @@ class App extends Component {
       </div>
     )
   }
+}
+
+App.defaultProps = {
+  count: 0
 }
 export default App

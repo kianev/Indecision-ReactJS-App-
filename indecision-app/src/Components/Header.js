@@ -1,13 +1,16 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-class Header extends Component {
-  render () {
-    return (
-      <div className="header">
-        <h1>{this.props.title}</h1>
-        <h2>{this.props.subTitle}</h2>
-      </div>
-    )
-  }
+const Header = (props) => {
+  return (
+    <div className="header">
+      <h1>{props.title}</h1>
+      {props.subTitle && <h2>{props.subTitle}</h2>}
+    </div>
+  )
 }
+
+Header.defaultProps = {
+  title: 'Indecision'
+}
+
 export default Header
