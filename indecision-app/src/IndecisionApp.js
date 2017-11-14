@@ -6,16 +6,38 @@ import Options from './Components/Options';
 import AddOption from './Components/AddOption';
 
 class App extends Component {
-  constructor (props){
-    super(props);
-    this.state = {
-      subTitle: "Put your life in the hands of computer.",
-      options: props.options
+  state = {
+    subTitle: "Put your life in the hands of computer.",
+    options: []
+  }
+
+  handleDeleteOptions = () => {
+    this.setState({ options: [] });
+  }
+
+  handleDeleteOption = (optionToDelete) => {
+    this.setState((prevState) => ({
+      options: prevState.options.filter((option) => optionToDelete !== option)
+    }))
+  }
+
+  handlePick = () => {
+    let randomNum = Math.floor(Math.random() * this.state.options.length);
+    let option = this.state.options[randomNum];
+    alert(option);
+  }
+
+  handleAddOption = (option) => {
+    if (!option) {
+      return 'Enter valid value to add item!'
+    } else if (this.state.options.indexOf(option) > -1) {
+      return 'This option already exists.'
     }
-    this.handleDeleteOptions = this.handleDeleteOptions.bind(this);
-    this.handlePick = this.handlePick.bind(this);
-    this.handleAddOption = this.handleAddOption.bind(this);
-    this.handleDeleteOption = this.handleDeleteOption.bind(this);
+
+    this.setState((prevState) => ({
+        options: prevState.options.concat(option)
+      })
+    )
   }
 
   componentDidMount(){
@@ -41,35 +63,6 @@ class App extends Component {
 
   componentWillUnmount(){
     console.log("ComponentWillUnmount")
-  }
-
-  handleDeleteOptions(){
-    this.setState({ options: [] });
-  }
-
-  handleDeleteOption(optionToDelete){
-    this.setState((prevState) => ({
-      options: prevState.options.filter((option) => optionToDelete !== option)
-    }))
-  }
-
-  handlePick(){
-    let randomNum = Math.floor(Math.random() * this.state.options.length);
-    let option = this.state.options[randomNum];
-    alert(option);
-  }
-
-  handleAddOption(option) {
-    if (!option) {
-      return 'Enter valid value to add item!'
-    } else if (this.state.options.indexOf(option) > -1) {
-      return 'This option already exists.'
-    }
-
-    this.setState((prevState) => ({
-      options: prevState.options.concat(option)
-    })
-    )
   }
 
   render () {
