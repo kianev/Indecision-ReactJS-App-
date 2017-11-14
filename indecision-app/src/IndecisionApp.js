@@ -4,11 +4,17 @@ import Header from './Components/Header';
 import Action from './Components/Action';
 import Options from './Components/Options';
 import AddOption from './Components/AddOption';
+import OptionModal from './Components/OptionModal';
 
 class App extends Component {
   state = {
     subTitle: "Put your life in the hands of computer.",
-    options: []
+    options: [],
+    selectedOption: undefined
+  }
+
+  handleCloseModal = () => {
+    this.setState({ selectedOption: undefined });
   }
 
   handleDeleteOptions = () => {
@@ -24,7 +30,9 @@ class App extends Component {
   handlePick = () => {
     let randomNum = Math.floor(Math.random() * this.state.options.length);
     let option = this.state.options[randomNum];
-    alert(option);
+    this.setState(() => ({
+      selectedOption: option
+    }))
   }
 
   handleAddOption = (option) => {
@@ -76,6 +84,7 @@ class App extends Component {
           handleDeleteOption={this.handleDeleteOption}
         />
         <AddOption handleAddOption={this.handleAddOption}/>
+        <OptionModal selectedOption={this.state.selectedOption} handleCloseModal={this.handleCloseModal}/>
       </div>
     )
   }
