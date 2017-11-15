@@ -1,5 +1,6 @@
-import React, { Component } from 'react'
-import './App.css'
+import React, { Component } from 'react';
+import 'normalize.css/normalize.css';
+import './App.css';
 import Header from './Components/Header';
 import Action from './Components/Action';
 import Options from './Components/Options';
@@ -77,13 +78,17 @@ class App extends Component {
     return (
       <div className="App">
         <Header subTitle={this.state.subTitle}/>
-        <Action hasOptions={this.state.options.length > 0} handlePick={this.handlePick}/>
-        <Options
-          options={this.state.options}
-          handleDeleteOptions={this.handleDeleteOptions}
-          handleDeleteOption={this.handleDeleteOption}
-        />
-        <AddOption handleAddOption={this.handleAddOption}/>
+        <div className="container">
+          <Action hasOptions={this.state.options.length > 0} handlePick={this.handlePick}/>
+          <div className="widget">
+            <Options
+              options={this.state.options}
+              handleDeleteOptions={this.handleDeleteOptions}
+              handleDeleteOption={this.handleDeleteOption}
+            />
+            <AddOption handleAddOption={this.handleAddOption}/>
+          </div>
+        </div>
         <OptionModal selectedOption={this.state.selectedOption} handleCloseModal={this.handleCloseModal}/>
       </div>
     )
